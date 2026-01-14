@@ -67,6 +67,8 @@ CREATE TABLE `body_records` (
 身体指标记录
 <img width="1919" height="529" alt="image" src="https://github.com/user-attachments/assets/18a26908-3099-49ed-8a5f-bc4d0c92d95b" />
 
+第三天
+
 
 
 
