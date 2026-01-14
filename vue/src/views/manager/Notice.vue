@@ -25,7 +25,7 @@
       </el-table>
     </div>
     <div class="card" v-if="data.total">
-      <el-pagination @current-change="load" background layout="prev, pager, next" :page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total" />
+      <el-pagination @current-change="load" background layout="total, prev, pager, next" :page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total" />
     </div>
 
     <el-dialog title="公告信息" v-model="data.formVisible" width="40%" destroy-on-close>
@@ -77,6 +77,8 @@ const load = () => {
     if (res.code === '200') {
       data.tableData = res.data?.list || []
       data.total = res.data?.total
+    }else {
+      ElMessage.error(res.msg)
     }
   })
 }

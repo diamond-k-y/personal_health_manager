@@ -43,6 +43,7 @@
               <el-icon><Menu /></el-icon>
               <span>信息管理</span>
             </template>
+            <el-menu-item index="/manager/bodyRecords" >身体指标记录</el-menu-item>
             <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2" v-if="data.user.role === 'ADMIN'">
@@ -66,12 +67,12 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import router from "@/router/index.js";
 import {ElMessage} from "element-plus";
 
 const data = reactive({
-  user: JSON.parse(localStorage.getItem('xm-user') || '{}')
+  user: {}
 })
 
 const logout = () => {
@@ -83,10 +84,14 @@ const updateUser = () => {
   data.user =  JSON.parse(localStorage.getItem('xm-user') || '{}')
 }
 
-if (!data.user.id) {
-  logout()
-  ElMessage.error('请登录！')
-}
+// 在组件挂载时检查用户信息
+onMounted(() => {
+  data.user = JSON.parse(localStorage.getItem('xm-user') || '{}')
+  if (!data.user.id) {
+    logout()
+    ElMessage.error('请登录！')
+  }
+})
 </script>
 
 <style scoped>

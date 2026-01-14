@@ -117,7 +117,8 @@ const login = () => {
           ElMessage.success('登录成功')
           // 存储用户信息到浏览器的缓存
           localStorage.setItem('xm-user', JSON.stringify(res.data))
-          router.push('/manager/home')
+          // 使用 replace 替代 push，避免需要刷新的问题
+          router.replace('/manager/home')
         } else {
           ElMessage.error(res.msg)
         }
