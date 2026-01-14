@@ -58,6 +58,16 @@ const update = () => {
         ElMessage.error(res.msg)
       }
     })
+  }else if (data.user.role === 'USER') {
+    request.put('/user/update', data.user).then(res => {
+      if (res.code === '200') {
+        ElMessage.success('保存成功')
+        localStorage.setItem('xm-user', JSON.stringify(data.user))
+        emit('updateUser')
+      } else {
+        ElMessage.error(res.msg)
+      }
+    })
   }
 }
 </script>

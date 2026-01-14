@@ -57,6 +57,15 @@
         </el-tabs>
         
         <el-form ref="formRef" :model="data.form" :rules="data.rules">
+          <div v-if="data.activeTab === 'login'">
+            <div class="form-label">角色</div>
+            <el-form-item prop="role">
+              <el-select size="large" v-model="data.form.role" placeholder="请选择登录角色" style="width: 100%;">
+                <el-option label="管理员" value="ADMIN"></el-option>
+                <el-option label="普通用户" value="USER"></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
           <div class="form-label">用户名</div>
           <el-form-item prop="username">
             <el-input size="large" v-model="data.form.username" :placeholder="data.activeTab === 'login' ? '请输入用户名' : '请输入用户名（仅支持字母、数字和下划线）'"></el-input>
@@ -84,8 +93,11 @@ import router from "@/router/index.js";
 
 const data = reactive({
   activeTab: 'login',
-  form: { role: 'ADMIN' },
+  form: { role: 'USER' },
   rules: {
+    role: [
+      { required: true, message: '请选择登录角色', trigger: 'change' }
+    ],
     username: [
       { required: true, message: '请输入账号', trigger: 'blur' }
     ],
@@ -117,7 +129,9 @@ const login = () => {
 const register = () => {
   formRef.value.validate(valid => {
     if (valid) { // 表示表单校验通过
-      request.post('/register', data.form).then(res => {
+      // 注册时固定为 USER 角色
+      const registerData = { ...data.form, role: 'USER' }
+      request.post('/register', registerData).then(res => {
         if (res.code === '200') {
           ElMessage.success('注册成功，请登录')
           data.activeTab = 'login'
