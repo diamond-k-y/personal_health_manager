@@ -40,6 +40,10 @@ CREATE TABLE `user` (
 定义一个formRef（注释的部分是简化版的表单提醒，只给出一个提示框）
 <img width="518" height="384" alt="image" src="https://github.com/user-attachments/assets/12474486-cde1-4264-8a49-a7ba0547eec2" />
 
+通过v-if来控制用户的访问权限
+<img width="1919" height="394" alt="image" src="https://github.com/user-attachments/assets/2778ba8c-f662-4383-9603-d79d67a23d08" />
+
+
 
 
 
