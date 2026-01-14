@@ -31,7 +31,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='普通用户信息';
 
-用户表单提醒
+·用户表单验证
 <img width="1919" height="898" alt="image" src="https://github.com/user-attachments/assets/a8cdb063-9b16-4449-8eba-3edd750aad53" />
 先定义一个rules
 <img width="789" height="258" alt="image" src="https://github.com/user-attachments/assets/0b8f3133-1b4a-4d40-85ce-b26b2a87c05f" />
@@ -42,6 +42,31 @@ CREATE TABLE `user` (
 
 通过v-if来控制用户的访问权限
 <img width="1919" height="394" alt="image" src="https://github.com/user-attachments/assets/2778ba8c-f662-4383-9603-d79d67a23d08" />
+
+身体指标记录信息
+SQL：
+CREATE TABLE `body_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `height` double DEFAULT NULL COMMENT '身高',
+  `weight` double DEFAULT NULL COMMENT '体重',
+  `low_pressure` double DEFAULT NULL COMMENT '低压',
+  `high_pressure` double DEFAULT NULL COMMENT '高压',
+  `blood_sugar` double DEFAULT NULL COMMENT '血糖',
+  `heart_rate` double DEFAULT NULL COMMENT '心率',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '记录日期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='身体指标记录';
+
+
+·数据隔离：每个用户只能看到自己的身体指标数据，管理员可以查看所用用户的数据
+<if test="userId != null"> and body_records.user_id = #{userId}</if>
+
+·数据关联：左外连接，用户新增数据时将id也传入表中
+
+身体指标记录
+<img width="1919" height="529" alt="image" src="https://github.com/user-attachments/assets/18a26908-3099-49ed-8a5f-bc4d0c92d95b" />
+
 
 
 
