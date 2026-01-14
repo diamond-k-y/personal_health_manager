@@ -16,3 +16,32 @@
 <img width="1919" height="441" alt="image" src="https://github.com/user-attachments/assets/5fab9be1-92d8-49d0-997d-ddb07f440716" />
 
 
+第二天
+普通用户信息管理
+数据库：沿用管理员的表
+CREATE TABLE `user` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '账号',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '姓名',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '角色',
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '电话',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='普通用户信息';
+
+用户表单提醒
+<img width="1919" height="898" alt="image" src="https://github.com/user-attachments/assets/a8cdb063-9b16-4449-8eba-3edd750aad53" />
+先定义一个rules
+<img width="789" height="258" alt="image" src="https://github.com/user-attachments/assets/0b8f3133-1b4a-4d40-85ce-b26b2a87c05f" />
+绑定到表单上
+<img width="1140" height="32" alt="image" src="https://github.com/user-attachments/assets/7915308d-d1ee-41c7-8e8c-9773b1bd52f0" />
+定义一个formRef（注释的部分是简化版的表单提醒，只给出一个提示框）
+<img width="518" height="384" alt="image" src="https://github.com/user-attachments/assets/12474486-cde1-4264-8a49-a7ba0547eec2" />
+
+
+
+
+
+
