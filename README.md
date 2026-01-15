@@ -126,5 +126,20 @@ public void add(SleepRecords sleepRecords) {
 <img width="1919" height="460" alt="image" src="https://github.com/user-attachments/assets/925e7f93-daf8-4193-8273-ab94767ed064" />
 
 
+第四天
+开发帖子相关功能（富文本）
+CREATE TABLE `forum` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '标题',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
+  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '封面',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '内容',
+  `user_id` int DEFAULT NULL COMMENT '用户ID',
+  `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '发帖时间',
+  `read_count` int DEFAULT NULL COMMENT '浏览量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='帖子信息';
+
+<img width="1902" height="895" alt="image" src="https://github.com/user-attachments/assets/066a13fe-dc7a-47e0-bcc0-24c944d2d317" />
 
 
