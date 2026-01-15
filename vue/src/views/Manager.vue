@@ -45,6 +45,7 @@
             </template>
             <el-menu-item index="/manager/bodyRecords" >身体指标记录</el-menu-item>
             <el-menu-item index="/manager/sportsRecords" >运动指标记录</el-menu-item>
+            <el-menu-item index="/manager/eatingRecords" >饮食指标记录</el-menu-item>
             <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2" v-if="data.user.role === 'ADMIN'">
