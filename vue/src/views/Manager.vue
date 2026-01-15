@@ -38,6 +38,7 @@
             <el-icon><HomeFilled /></el-icon>
             <span>系统首页</span>
           </el-menu-item>
+
           <el-sub-menu index="1">
             <template #title>
               <el-icon><Notebook /></el-icon>
@@ -54,6 +55,7 @@
               <el-icon><Menu /></el-icon>
               <span>信息管理</span>
             </template>
+            <el-menu-item index="/manager/forum">帖子信息</el-menu-item>
             <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
           </el-sub-menu>
 
