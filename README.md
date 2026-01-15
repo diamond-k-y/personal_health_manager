@@ -110,8 +110,20 @@ CREATE TABLE `sleep_records` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='睡眠记录';
 
-
-
+<img width="1919" height="417" alt="image" src="https://github.com/user-attachments/assets/68afbf0b-ae6a-41fe-a5ce-4e4b3e0328f8" />
+-如何计算睡眠的时间？
+-统一计算公式
+public void add(SleepRecords sleepRecords) {
+        sleepRecords.setDate(DateUtil.today());
+        // 统一计算的公式  入睡是昨天   起床是今天
+        String sleepTime = DateUtil.formatDate(DateUtil.yesterday()) + " " + sleepRecords.getSleepTime() + ":00"; // 23:00   =>   2025-04-15 23:00:00
+        String wakeupTime = DateUtil.today() + " " + sleepRecords.getWakeupTime() + ":00"; // 23:00   =>   2025-04-15 23:00:00
+        long minutes = DateUtil.between(DateUtil.parseDateTime(sleepTime), DateUtil.parseDateTime(wakeupTime), DateUnit.MINUTE);// 计算分钟
+        BigDecimal hours = BigDecimal.valueOf(minutes).divide(BigDecimal.valueOf(60), 1, RoundingMode.HALF_UP);
+        sleepRecords.setSleepDuration(hours.doubleValue());
+        sleepRecordsMapper.insert(sleepRecords);
+    }
+<img width="1919" height="460" alt="image" src="https://github.com/user-attachments/assets/925e7f93-daf8-4193-8273-ab94767ed064" />
 
 
 
