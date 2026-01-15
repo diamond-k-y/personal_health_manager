@@ -61,6 +61,7 @@ CREATE TABLE `body_records` (
 
 ·数据隔离：每个用户只能看到自己的身体指标数据，管理员可以查看所用用户的数据
 <if test="userId != null"> and body_records.user_id = #{userId}</if>
+<el-button type="primary" plain @click="handleAdd" v-if="data.user.role === 'USER'">新增</el-button>
 
 ·数据关联：左外连接，用户新增数据时将id也传入表中
 
@@ -68,6 +69,21 @@ CREATE TABLE `body_records` (
 <img width="1919" height="529" alt="image" src="https://github.com/user-attachments/assets/18a26908-3099-49ed-8a5f-bc4d0c92d95b" />
 
 第三天
+运动记录管理
+CREATE TABLE `sports_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '运动类型',
+  `during` int(11) DEFAULT NULL COMMENT '运动时长',
+  `distance` double DEFAULT NULL COMMENT '运动距离',
+  `calorie` double DEFAULT NULL COMMENT '卡路里',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '记录日期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='运动记录';
+
+<img width="1919" height="480" alt="image" src="https://github.com/user-attachments/assets/8a7f9c81-c6e3-4cf6-a9e6-2db40b00fb64" />
+<img width="1919" height="459" alt="image" src="https://github.com/user-attachments/assets/e84addf7-5ec9-4184-b721-66595143b895" />
+
 
 
 
