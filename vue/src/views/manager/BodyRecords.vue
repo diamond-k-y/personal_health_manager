@@ -6,7 +6,7 @@
       <el-button type="warning" plain style="margin: 0 10px" @click="reset">重置</el-button>
     </div>
     <div class="card" style="margin-bottom: 5px">
-      <el-button type="primary" plain @click="handleAdd">新增</el-button>
+      <el-button type="primary" plain @click="handleAdd" v-if="data.user.role === 'USER'">新增</el-button>
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
 
@@ -19,16 +19,36 @@
             {{ scope.row.height }}cm
           </template>
         </el-table-column>
-        <el-table-column prop="weight" label="体重"></el-table-column>
-        <el-table-column prop="lowPressure" label="低压"></el-table-column>
-        <el-table-column prop="highPressure" label="高压"></el-table-column>
-        <el-table-column prop="bloodSugar" label="血糖"></el-table-column>
-        <el-table-column prop="heartRate" label="心率"></el-table-column>
+        <el-table-column prop="weight" label="体重">
+          <template v-slot="scope">
+            {{ scope.row.weight }}kg
+          </template>
+        </el-table-column>
+        <el-table-column prop="lowPressure" label="低压">
+          <template v-slot="scope">
+            {{ scope.row.lowPressure }}mmHg
+          </template>
+        </el-table-column>
+        <el-table-column prop="highPressure" label="高压">
+          <template v-slot="scope">
+            {{ scope.row.highPressure }}mmHg
+          </template>
+        </el-table-column>
+        <el-table-column prop="bloodSugar" label="血糖">
+          <template v-slot="scope">
+            {{ scope.row.bloodSugar }}mmol/L
+          </template>
+        </el-table-column>
+        <el-table-column prop="heartRate" label="心率">
+          <template v-slot="scope">
+            {{ scope.row.heartRate }}次/分钟
+          </template>
+        </el-table-column>
         <el-table-column prop="date" label="记录日期"></el-table-column>
 
         <el-table-column label="操作" width="100" fixed="right">
           <template v-slot="scope">
-            <el-button type="primary" circle :icon="Edit" @click="handleEdit(scope.row)"></el-button>
+            <el-button type="primary" circle :icon="Edit" @click="handleEdit(scope.row)" v-if="data.user.role === 'USER'"></el-button>
             <el-button type="danger" circle :icon="Delete" @click="del(scope.row.id)"></el-button>
           </template>
         </el-table-column>
