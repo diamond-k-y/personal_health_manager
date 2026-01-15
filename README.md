@@ -84,7 +84,31 @@ CREATE TABLE `sports_records` (
 <img width="1919" height="480" alt="image" src="https://github.com/user-attachments/assets/8a7f9c81-c6e3-4cf6-a9e6-2db40b00fb64" />
 <img width="1919" height="459" alt="image" src="https://github.com/user-attachments/assets/e84addf7-5ec9-4184-b721-66595143b895" />
 
+饮食记录管理
+CREATE TABLE `eating_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  `foods_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '食物名称',
+  `intake` int(11) DEFAULT NULL COMMENT '摄入量',
+  `calorie` int(11) DEFAULT NULL COMMENT '卡路里',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '记录日期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='饮食记录';
+<img width="1919" height="531" alt="image" src="https://github.com/user-attachments/assets/4c9519dd-0e3e-4eee-9a5c-beff7edc0dc8" />
 
+
+
+睡眠记录管理
+CREATE TABLE `sleep_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `sleep_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '入睡时间',
+  `wakeup_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '起床时间',
+  `sleep_duration` double DEFAULT NULL COMMENT '睡眠时长',
+  `sleep_quality` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '睡眠质量',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '记录日期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='睡眠记录';
 
 
 
