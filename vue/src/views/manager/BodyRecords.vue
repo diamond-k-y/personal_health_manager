@@ -78,6 +78,9 @@
         <el-form-item prop="heartRate" label="心率(次/分钟)">
           <el-input-number style="width: 240px" v-model="data.form.heartRate" placeholder="请输入心率"></el-input-number>
         </el-form-item>
+        <el-form-item prop="date" label="记录日期">
+          <el-date-picker style="width: 240px" v-model="data.form.date" type="date" placeholder="记录日期" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+        </el-form-item>
 
       </el-form>
       <template #footer>

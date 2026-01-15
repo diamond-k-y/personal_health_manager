@@ -31,7 +31,7 @@
     <div style="display: flex">
       <div class="manager-main-left">
         <el-menu :default-active="router.currentRoute.value.path"
-                 :default-openeds="['1', '2']"
+                 :default-openeds="['1', '2', '3']"
                  router
         >
           <el-menu-item index="/manager/home">
@@ -40,14 +40,23 @@
           </el-menu-item>
           <el-sub-menu index="1">
             <template #title>
-              <el-icon><Menu /></el-icon>
-              <span>信息管理</span>
+              <el-icon><Notebook /></el-icon>
+              <span>健康记录</span>
             </template>
             <el-menu-item index="/manager/bodyRecords" >身体指标记录</el-menu-item>
             <el-menu-item index="/manager/sportsRecords" >运动指标记录</el-menu-item>
             <el-menu-item index="/manager/eatingRecords" >饮食指标记录</el-menu-item>
+            <el-menu-item index="/manager/sleepRecords" >睡眠指标记录</el-menu-item>
+          </el-sub-menu>
+
+          <el-sub-menu index="3">
+            <template #title>
+              <el-icon><Menu /></el-icon>
+              <span>信息管理</span>
+            </template>
             <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
           </el-sub-menu>
+
           <el-sub-menu index="2" v-if="data.user.role === 'ADMIN'">
             <template #title>
               <el-icon><Menu /></el-icon>

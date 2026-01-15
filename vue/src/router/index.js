@@ -17,6 +17,7 @@ const router = createRouter({
         { path: 'bodyRecords', meta: { name: '身体指标记录' }, component: () => import('@/views/manager/BodyRecords.vue'), },
         { path: 'sportsRecords', meta: { name: '运动指标记录' }, component: () => import('@/views/manager/SportsRecords.vue'), },
         { path: 'eatingRecords', meta: { name: '饮食指标记录' }, component: () => import('@/views/manager/EatingRecords.vue'), },
+        { path: 'sleepRecords', meta: { name: '睡眠指标记录' }, component: () => import('@/views/manager/SleepRecords.vue'), },
       ]
     },
     { path: '/login', component: () => import('@/views/Login.vue') },

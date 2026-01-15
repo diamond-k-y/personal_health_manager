@@ -1,6 +1,7 @@
 package com.example.service;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.example.entity.BodyRecords;
 import com.example.mapper.BodyRecordsMapper;
 import com.github.pagehelper.PageHelper;
@@ -20,7 +21,9 @@ public class BodyRecordsService {
     private BodyRecordsMapper bodyRecordsMapper;
 
     public void add(BodyRecords bodyRecords) {
-        bodyRecords.setDate(DateUtil.today());
+        if (StrUtil.isBlank(bodyRecords.getDate())){
+            bodyRecords.setDate(DateUtil.today());
+        }
         bodyRecordsMapper.insert(bodyRecords);
     }
 

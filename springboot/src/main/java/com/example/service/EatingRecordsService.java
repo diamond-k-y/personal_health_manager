@@ -1,6 +1,7 @@
 package com.example.service;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.example.entity.EatingRecords;
 import com.example.mapper.EatingRecordsMapper;
 import com.github.pagehelper.PageHelper;
@@ -20,7 +21,9 @@ public class EatingRecordsService {
     private EatingRecordsMapper eatingRecordsMapper;
 
     public void add(EatingRecords eatingRecords) {
-        eatingRecords.setDate(DateUtil.today());
+        if (StrUtil.isBlank(eatingRecords.getDate())){
+            eatingRecords.setDate(DateUtil.today());
+        }
         eatingRecordsMapper.insert(eatingRecords);
     }
 

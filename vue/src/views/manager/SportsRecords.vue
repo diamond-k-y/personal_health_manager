@@ -60,6 +60,9 @@
         <el-form-item prop="calorie" label="卡路里(kcal)">
           <el-input-number style="width: 200px" v-model="data.form.calorie" placeholder="请输入卡路里"></el-input-number>
         </el-form-item>
+        <el-form-item prop="date" label="记录日期">
+          <el-date-picker style="width: 200px" v-model="data.form.date" type="date" placeholder="记录日期" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+        </el-form-item>
 
       </el-form>
       <template #footer>

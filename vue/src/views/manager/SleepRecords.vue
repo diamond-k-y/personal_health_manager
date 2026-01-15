@@ -14,17 +14,14 @@
       <el-table stripe :data="data.tableData" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="userName" label="用户名称"></el-table-column>
-        <el-table-column prop="foodsName" label="食物名称"></el-table-column>
-        <el-table-column prop="intake" label="摄入量">
+        <el-table-column prop="sleepTime" label="入睡时间"></el-table-column>
+        <el-table-column prop="wakeupTime" label="起床时间"></el-table-column>
+        <el-table-column prop="sleepDuration" label="睡眠时长">
           <template v-slot="scope">
-            {{ scope.row.intake }}g
+            {{ scope.row.sleepDuration }}小时
           </template>
         </el-table-column>
-        <el-table-column prop="calorie" label="卡路里">
-          <template v-slot="scope">
-            {{ scope.row.calorie }}kcal
-          </template>
-        </el-table-column>
+        <el-table-column prop="sleepQuality" label="睡眠质量"></el-table-column>
         <el-table-column prop="date" label="记录日期"></el-table-column>
 
         <el-table-column label="操作" width="100" fixed="right">
@@ -39,16 +36,18 @@
       <el-pagination @current-change="load" background layout="total, prev, pager, next" :page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total" />
     </div>
 
-    <el-dialog title="饮食记录信息" v-model="data.formVisible" width="30%" destroy-on-close>
+    <el-dialog title="睡眠指标信息" v-model="data.formVisible" width="30%" destroy-on-close>
       <el-form ref="formRef" :model="data.form" :rules="data.rules" label-width="120px" style="padding: 20px">
-        <el-form-item prop="foodsName" label="食物名称">
-          <el-input style="width: 200px" v-model="data.form.foodsName" placeholder="请输入食物名称"></el-input>
+        <el-form-item prop="sleepTime" label="入睡时间">
+          <el-time-select style="width: 200px" start="00:00" end="23:30" placeholder="请输入入睡时间" v-model="data.form.sleepTime"></el-time-select>
         </el-form-item>
-        <el-form-item prop="intake" label="摄入量(g)">
-          <el-input-number style="width: 200px" v-model="data.form.intake" placeholder="请输入摄入量"></el-input-number>
+        <el-form-item prop="wakeupTime" label="起床时间">
+          <el-time-select style="width: 200px" start="00:00" end="23:30" placeholder="请输入起床时间" v-model="data.form.wakeupTime"></el-time-select>
         </el-form-item>
-        <el-form-item prop="calorie" label="卡路里(kcal)">
-          <el-input-number style="width: 200px" v-model="data.form.calorie" placeholder="请输入卡路里"></el-input-number>
+        <el-form-item prop="sleepQuality" label="睡眠质量">
+          <el-select style="width: 200px" v-model="data.form.sleepQuality">
+            <el-option v-for="item in ['很差', '一般', '良好', '非常好']" :key="item" :value="item" :label="item"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item prop="date" label="记录日期">
           <el-date-picker style="width: 200px" v-model="data.form.date" type="date" placeholder="记录日期" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
@@ -83,14 +82,14 @@ const data = reactive({
   date: null,
   ids: [],
   rules: {
-    foodsName: [
-      {  required: true, message: '请输入食物名称', trigger: 'blur' }
+    sleepTime: [
+      {  required: true, message: '请输入入睡时间', trigger: 'blur' }
     ],
-    intake: [
-      {  required: true, message: '请输入摄入量', trigger: 'blur' }
+    wakeupTime: [
+      {  required: true, message: '请输入起床时间', trigger: 'blur' }
     ],
-    calorie: [
-      {  required: true, message: '请输入卡路里', trigger: 'blur' }
+    sleepQuality: [
+      {  required: true, message: '请选择睡眠质量', trigger: 'change' }
     ],
   }
 })
@@ -98,7 +97,7 @@ const data = reactive({
 const formRef = ref()
 
 const load = () => {
-  request.get('/eatingRecords/selectPage', {
+  request.get('/sleepRecords/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
@@ -127,7 +126,7 @@ const handleEdit = (row) => {
 
 const add = () => {
   data.form.userId = data.user.id
-  request.post('/eatingRecords/add', data.form).then(res => {
+  request.post('/sleepRecords/add', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('操作成功')
       data.formVisible = false
@@ -139,7 +138,7 @@ const add = () => {
 }
 
 const update = () => {
-  request.put('/eatingRecords/update', data.form).then(res => {
+  request.put('/sleepRecords/update', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('操作成功')
       data.formVisible = false
@@ -160,7 +159,7 @@ const save = () => {
 
 const del = (id) => {
   ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
-    request.delete('/eatingRecords/delete/' + id).then(res => {
+    request.delete('/sleepRecords/delete/' + id).then(res => {
       if (res.code === '200') {
         ElMessage.success("删除成功")
         load()
@@ -178,7 +177,7 @@ const delBatch = () => {
     return
   }
   ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
-    request.delete("/eatingRecords/delete/batch", {data: data.ids}).then(res => {
+    request.delete("/sleepRecords/delete/batch", {data: data.ids}).then(res => {
       if (res.code === '200') {
         ElMessage.success('操作成功')
         load()
