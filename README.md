@@ -142,4 +142,38 @@ CREATE TABLE `forum` (
 
 <img width="1902" height="895" alt="image" src="https://github.com/user-attachments/assets/066a13fe-dc7a-47e0-bcc0-24c944d2d317" />
 
+新增审核状态字段
+CREATE TABLE `forum` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '标题',
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简介',
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '封面',
+  `content` longtext COLLATE utf8mb4_unicode_ci COMMENT '内容',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '发帖时间',
+  `read_count` int(11) DEFAULT NULL COMMENT '浏览量',
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审核状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='帖子信息';
+<img width="1919" height="745" alt="image" src="https://github.com/user-attachments/assets/09f1b53b-51c1-41c9-afcc-54c6bb4e836d" />
+
+
+更新浏览量
+用户点击一次，readCount就执行一次update（自增一次）
+@Update("update forum set read_count = read_count + 1 where id = #{id}")
+void updateReadCountById(Integer id);
+
+
+用户编辑帖子后触发重新审核流程
+public void updateById(Forum forum) {
+Account currentUser = TokenUtils.getCurrentUser();
+// 用户编辑了内容  设置成待审核状态
+if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+    forum.setStatus("待审核");
+}
+forumMapper.updateById(forum);
+}
+<img width="1919" height="520" alt="image" src="https://github.com/user-attachments/assets/2e9d77a2-d34a-47cb-8f33-86c02be228d8" />
+
+
 
