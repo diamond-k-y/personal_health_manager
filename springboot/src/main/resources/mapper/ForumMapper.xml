@@ -4,11 +4,12 @@
 <mapper namespace="com.example.mapper.ForumMapper">
 
     <select id="selectAll" resultType="com.example.entity.Forum">
-        select forum.*, user.name as userName from `forum`
+        select forum.*, user.name as userName, user.avatar as userAvatar from `forum`
         left join user on `forum`.user_id = user.id
         <where>
             <if test="title != null"> and forum.title like concat('%', #{title}, '%')</if>
             <if test="userId != null"> and forum.user_id = #{userId}</if>
+            <if test="status != null"> and forum.status = #{status}</if>
         </where>
         order by forum.id desc
     </select>
@@ -29,6 +30,7 @@
             <if test="userId != null">user_id,</if>
             <if test="time != null">time,</if>
             <if test="readCount != null">read_count,</if>
+            <if test="status != null">status,</if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -40,6 +42,7 @@
             <if test="userId != null">#{userId},</if>
             <if test="time != null">#{time},</if>
             <if test="readCount != null">#{readCount},</if>
+            <if test="status != null">#{status}</if>
         </trim>
 
     </insert>
@@ -70,6 +73,9 @@
             </if>
             <if test="readCount != null">
                 read_count = #{readCount},
+            </if>
+            <if test="status != null">
+                status = #{status},
             </if>
         </set>
         where id = #{id}

@@ -39,6 +39,11 @@
             <span>系统首页</span>
           </el-menu-item>
 
+          <el-menu-item index="/manager/globalForum">
+            <el-icon><Apple /></el-icon>
+            <span>健康论坛</span>
+          </el-menu-item>
+
           <el-sub-menu index="1">
             <template #title>
               <el-icon><Notebook /></el-icon>

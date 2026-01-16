@@ -52,4 +52,14 @@ public class Forum {
      * 用户名 (发帖人)
      */
     private String userName;
+
+    /**
+     * 状态
+     */
+    private String Status;
+
+    /**
+     * 用户头像
+     */
+    private String userAvatar;
 }

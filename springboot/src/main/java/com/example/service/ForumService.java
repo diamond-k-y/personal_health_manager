@@ -2,8 +2,11 @@ package com.example.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.Forum;
 import com.example.mapper.ForumMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -23,10 +26,17 @@ public class ForumService {
     public void add(Forum forum) {
         forum.setTime(DateUtil.now());
         forum.setReadCount(0);
+        forum.setStatus("待审核");
         forumMapper.insert(forum);
     }
 
     public void updateById(Forum forum) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        //用户编辑了内容，设置为待审核状态
+        if (currentUser.getRole().equals(RoleEnum.USER.name())){
+            forum.setStatus("待审核");
+        }
+
         forumMapper.updateById(forum);
     }
 
@@ -41,6 +51,7 @@ public class ForumService {
     }
 
     public Forum selectById(Integer id) {
+        forumMapper.updateReadCountById(id);
         return forumMapper.selectById(id);
     }
 

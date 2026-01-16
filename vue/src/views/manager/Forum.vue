@@ -2,6 +2,13 @@
   <div>
     <div class="card" style="margin-bottom: 5px">
       <el-input v-model="data.title" prefix-icon="Search" style="width: 240px; margin-right: 10px" placeholder="请输入帖子标题查询"></el-input>
+
+      <el-select placeholder="请选择审核状态" style="width: 240px; margin-right: 10px" v-model="data.status">
+        <el-option label="待审核" value="待审核"></el-option>
+        <el-option label="通过" value="通过"></el-option>
+        <el-option label="拒绝" value="拒绝"></el-option>
+      </el-select>
+
       <el-button type="info" plain @click="load">查询</el-button>
       <el-button type="warning" plain style="margin: 0 10px" @click="reset">重置</el-button>
     </div>
@@ -25,9 +32,26 @@
             <el-button type="success" plain @click="view(scope.row.content)">查看内容</el-button>
           </template>
         </el-table-column>
+
+        <el-table-column prop="status" label="审核状态">
+          <template v-slot="scope">
+            <el-tag type="warning" v-if="scope.row.status ==='待审核'">待审核</el-tag>
+            <el-tag type="success" v-if="scope.row.status ==='通过'">通过</el-tag>
+            <el-tag type="danger" v-if="scope.row.status ==='拒绝'">拒绝</el-tag>
+          </template>
+        </el-table-column>
+
         <el-table-column prop="userName" label="发帖人"></el-table-column>
         <el-table-column prop="time" label="发帖时间"></el-table-column>
         <el-table-column prop="readCount" label="浏览量"></el-table-column>
+
+        <el-table-column label="审核" width="180" fixed="right" v-if="data.user.role === 'ADMIN'">
+          <template v-slot="scope">
+            <el-button type="primary" plain @click="changeStatus(scope.row, '通过')" v-if="scope.row.status === '待审核' || scope.row.status === '拒绝'">通过</el-button>
+            <el-button type="danger" plain @click="changeStatus(scope.row, '拒绝')" v-if="scope.row.status === '待审核' || scope.row.status === '通过'">拒绝</el-button>
+          </template>
+        </el-table-column>
+
         <el-table-column label="操作" width="100" fixed="right">
           <template v-slot="scope">
             <el-button type="primary" circle :icon="Edit" @click="handleEdit(scope.row)" v-if="data.user.role === 'USER'"></el-button>
@@ -116,6 +140,7 @@ const data = reactive({
   pageSize: 10,
   total: 0,
   title: null,
+  status: null,
   ids: [],
   rules: {
     title: [
@@ -127,6 +152,16 @@ const data = reactive({
   },
   content: null
 })
+
+const changeStatus = (row, status) => {
+  ElMessageBox.confirm('您确认审核吗？'+ status, '审核确认', { type: 'warning' }).then(res => {
+    data.form = JSON.parse(JSON.stringify(row))
+    data.form.status = status
+    update()
+  }).catch(err => {
+    console.error(err)
+  })
+}
 
 const formRef = ref()
 
@@ -170,6 +205,7 @@ const load = () => {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
       title: data.title,
+      status: data.status,
       userId: data.user.role === 'USER' ? data.user.id : null
     }
   }).then(res => {
@@ -267,6 +303,7 @@ const handleSelectionChange = (rows) => {
 
 const reset = () => {
   data.title = null
+  data.status = null
   load()
 }
 

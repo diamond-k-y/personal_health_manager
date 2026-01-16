@@ -19,6 +19,8 @@ const router = createRouter({
         { path: 'eatingRecords', meta: { name: '饮食指标记录' }, component: () => import('@/views/manager/EatingRecords.vue'), },
         { path: 'sleepRecords', meta: { name: '睡眠指标记录' }, component: () => import('@/views/manager/SleepRecords.vue'), },
         { path: 'forum', meta: { name: '帖子信息' }, component: () => import('@/views/manager/Forum.vue'), },
+        { path: 'globalForum', meta: { name: '健康论坛' }, component: () => import('@/views/manager/GlobalForum.vue'), },
+        { path: 'forumDetail', meta: { name: '论坛详情' }, component: () => import('@/views/manager/ForumDetail.vue'), },
       ]
     },
     { path: '/login', component: () => import('@/views/Login.vue') },
