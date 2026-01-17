@@ -28,7 +28,7 @@
             <div style="color: #333; margin-bottom: 5px">{{ item.content }}</div>
             <div style="color: #666; font-size: 13px; display: flex; align-items: center; margin-bottom: 10px">
               <div style="width: 150px">{{ item.time }}</div>
-              <div @click="handleReply(item)" style="cursor: pointe  r; margin-right: 20px"><el-icon size="14" color="#666" style="position: relative; top: 2px"><Comment /></el-icon>回复</div>
+              <div @click="handleReply(item)" style="cursor: pointer; margin-right: 20px"><el-icon size="14" color="#666" style="position: relative; top: 2px"><Comment /></el-icon>回复</div>
               <div @click="deleteComment(item.id)" v-if="item.userId === data.user.id" style="width: 50px; cursor: pointer;"><el-icon size="14" color="#666" style="position: relative; top: 2px"><Delete /></el-icon>删除</div>
             </div>
             <div v-if="item.showReply" style="margin-bottom: 10px">
