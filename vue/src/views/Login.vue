@@ -72,7 +72,7 @@
           </el-form-item>
           <div class="form-label">密码</div>
           <el-form-item prop="password">
-            <el-input show-password size="large" v-model="data.form.password" :placeholder="data.activeTab === 'login' ? '请输入密码' : '请输入密码（至少6位）'"></el-input>
+            <el-input show-password size="large" v-model="data.form.password" :placeholder="data.activeTab === 'login' ? '请输入密码' : '请输入密码(至少6位)'" @keyup.enter="handleEnter"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button v-if="data.activeTab === 'login'" size="large" type="primary" style="width: 100%; border-radius: 8px;" @click="login">登录</el-button>
@@ -134,7 +134,7 @@ const register = () => {
       const registerData = { ...data.form, role: 'USER' }
       request.post('/register', registerData).then(res => {
         if (res.code === '200') {
-          ElMessage.success('注册成功，请登录')
+          ElMessage.success('注册成功,请登录')
           data.activeTab = 'login'
           // 清空表单
           data.form.username = ''
@@ -145,6 +145,15 @@ const register = () => {
       })
     }
   })
+}
+
+// 处理回车键事件
+const handleEnter = () => {
+  if (data.activeTab === 'login') {
+    login()
+  } else {
+    register()
+  }
 }
 </script>
 
