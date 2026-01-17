@@ -21,6 +21,7 @@ const router = createRouter({
         { path: 'forum', meta: { name: '帖子信息' }, component: () => import('@/views/manager/Forum.vue'), },
         { path: 'globalForum', meta: { name: '健康论坛' }, component: () => import('@/views/manager/GlobalForum.vue'), },
         { path: 'forumDetail', meta: { name: '论坛详情' }, component: () => import('@/views/manager/ForumDetail.vue'), },
+        { path: 'comment', meta: { name: '评论信息' }, component: () => import('@/views/manager/Comment.vue'), },
       ]
     },
     { path: '/login', component: () => import('@/views/Login.vue') },
