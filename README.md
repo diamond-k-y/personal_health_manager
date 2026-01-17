@@ -176,4 +176,21 @@ forumMapper.updateById(forum);
 <img width="1919" height="520" alt="image" src="https://github.com/user-attachments/assets/2e9d77a2-d34a-47cb-8f33-86c02be228d8" />
 
 
+第五天
+评论表
+CREATE TABLE `comment` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '内容',
+  `user_id` int DEFAULT NULL COMMENT '用户ID',
+  `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '时间',
+  `pid` int DEFAULT NULL COMMENT '父级ID',
+  `fid` int DEFAULT NULL COMMENT '关联模块ID',
+  `root_id` int DEFAULT NULL COMMENT '根节点ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='评论信息';
+
+<img width="1910" height="895" alt="image" src="https://github.com/user-attachments/assets/2d471236-becf-425c-b66d-860b3505ae98" />
+
+
+
 
