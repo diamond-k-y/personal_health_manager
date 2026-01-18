@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.SportsRecords;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface SportsRecordsMapper {
 
     List<SportsRecords> selectAll(SportsRecords sportsRecords);
 
+    @Select("select * from `sports_records` where user_id = #{userId} and date = #{date}")
+    List<SportsRecords> selectByUserIdAndDate(@Param("userId") Integer userId, @Param("date") String date);
 }

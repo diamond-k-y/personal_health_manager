@@ -3,6 +3,7 @@ package com.example.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.example.entity.BodyRecords;
+import com.example.exception.CustomException;
 import com.example.mapper.BodyRecordsMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,6 +24,10 @@ public class BodyRecordsService {
     public void add(BodyRecords bodyRecords) {
         if (StrUtil.isBlank(bodyRecords.getDate())){
             bodyRecords.setDate(DateUtil.today());
+        }
+        BodyRecords dbRecords = bodyRecordsMapper.selectByUserIdAndDate(bodyRecords.getUserId(), bodyRecords.getDate());
+        if (dbRecords != null) {
+            throw new CustomException("500", "您今日已经记录过身体指标数据");
         }
         bodyRecordsMapper.insert(bodyRecords);
     }

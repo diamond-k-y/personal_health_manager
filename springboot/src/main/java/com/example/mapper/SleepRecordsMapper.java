@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.SleepRecords;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface SleepRecordsMapper {
 
     List< SleepRecords> selectAll( SleepRecords sleepRecords);
 
+    @Select("select * from `sleep_records` where user_id = #{userId} and date = #{date}")
+    List< SleepRecords> selectByUserIdAndDate(@Param("userId") Integer userId, @Param("date") String date);
 }
