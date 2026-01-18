@@ -191,6 +191,11 @@ CREATE TABLE `comment` (
 
 <img width="1910" height="895" alt="image" src="https://github.com/user-attachments/assets/2d471236-becf-425c-b66d-860b3505ae98" />
 
+第六天
+系统首页统计图表
+<img width="1905" height="892" alt="image" src="https://github.com/user-attachments/assets/66f0bd93-65d8-406c-b889-afbb40f31d7a" />
+
+
 
 
 
