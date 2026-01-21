@@ -79,13 +79,19 @@ import * as echarts from 'echarts'
 const lineOption1 = {
   title: {
     text: '近7天身体指标血压变化趋势',
-    left: 'center'
+    left: 'center',
+    top: '1%'
   },
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    left: 'left'
+    left: 'left',
+    top: '5%'
+  },
+  grid: {
+    top: '20%',
+    bottom: '10%'
   },
   xAxis: {
     name: '日期',
@@ -140,15 +146,21 @@ const lineOption1 = {
 
 const lineOption2 = {
   title: {
-    text: '近7天运动时长的趋势图',
+    text: '近7天运动时长趋势',
     subtext: '',
-    left: 'center'
+    left: 'center',
+    top: '1%'
   },
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    left: 'left'
+    left: 'left',
+    top: '5%'
+  },
+  grid: {
+    top: '20%',
+    bottom: '10%'
   },
   xAxis: {
     name: '日期',
@@ -156,12 +168,8 @@ const lineOption2 = {
     data: []
   },
   yAxis: {
-    name: '运动时长',
+    name: '运动时长（min）',
     type: 'value'
-  },
-  grid: {
-    top: '20%',
-    bottom:'10%'
   },
   series: [
     {

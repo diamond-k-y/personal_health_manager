@@ -33,7 +33,7 @@
         <where>
             comment.root_id = #{rootId} and comment.pid is not null
         </where>
-        order by comment.id desc
+        order by comment.id asc
     </select>
 
     <delete id="deleteById">

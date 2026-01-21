@@ -44,15 +44,28 @@
             <span>健康论坛</span>
           </el-menu-item>
 
+
           <el-sub-menu index="1">
             <template #title>
               <el-icon><Notebook /></el-icon>
               <span>健康记录</span>
             </template>
-            <el-menu-item index="/manager/bodyRecords" >身体指标记录</el-menu-item>
-            <el-menu-item index="/manager/sportsRecords" >运动指标记录</el-menu-item>
-            <el-menu-item index="/manager/eatingRecords" >饮食指标记录</el-menu-item>
-            <el-menu-item index="/manager/sleepRecords" >睡眠指标记录</el-menu-item>
+            <el-menu-item index="/manager/bodyRecords">
+              <el-icon><DataAnalysis /></el-icon>
+              <span>身体指标记录</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/sportsRecords">
+              <el-icon><Trophy /></el-icon>
+              <span>运动指标记录</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/eatingRecords">
+              <el-icon><Food /></el-icon>
+              <span>饮食指标记录</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/sleepRecords">
+              <el-icon><MoonNight /></el-icon>
+              <span>睡眠指标记录</span>
+            </el-menu-item>
           </el-sub-menu>
 
           <el-sub-menu index="3">
@@ -60,9 +73,18 @@
               <el-icon><Menu /></el-icon>
               <span>信息管理</span>
             </template>
-            <el-menu-item index="/manager/forum">帖子信息</el-menu-item>
-            <el-menu-item index="/manager/comment">评论信息</el-menu-item>
-            <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
+            <el-menu-item index="/manager/forum">
+              <el-icon><ChatDotSquare /></el-icon>
+              <span>帖子信息</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/comment">
+              <el-icon><Comment /></el-icon>
+              <span>评论信息</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">
+              <el-icon><Bell /></el-icon>
+              <span>系统公告</span>
+            </el-menu-item>
           </el-sub-menu>
 
           <el-sub-menu index="2" v-if="data.user.role === 'ADMIN'">
@@ -70,8 +92,14 @@
               <el-icon><Menu /></el-icon>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
-            <el-menu-item index="/manager/user">普通用户信息</el-menu-item>
+            <el-menu-item index="/manager/admin">
+              <el-icon><Avatar /></el-icon>
+              <span>管理员信息</span>
+            </el-menu-item>
+            <el-menu-item index="/manager/user">
+              <el-icon><User /></el-icon>
+              <span>普通用户信息</span>
+            </el-menu-item>
           </el-sub-menu>
         </el-menu>
       </div>
@@ -81,7 +109,7 @@
     </div>
     <!-- 下面部分结束 -->
 
-
+    <AiAssistant />
   </div>
 </template>
 
