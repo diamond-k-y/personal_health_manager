@@ -56,7 +56,7 @@ public class Forum {
     /**
      * 状态
      */
-    private String Status;
+    private String status;
 
     /**
      * 用户头像

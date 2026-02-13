@@ -64,14 +64,15 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import router from "@/router/index.js";
+import { reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import request from "@/utils/request.js";
-import {ElMessage} from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 
+const route = useRoute();
 const data = reactive({
   user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
-  id: router.currentRoute.value.query.id,
+  id: route.query.id,
   forum: {},
   form: {},
   total: 0,
@@ -82,9 +83,16 @@ const data = reactive({
   commentCount: 0
 })
 
-request.get('/forum/selectById/' + data.id).then(res => {
-  data.forum = res.data
-})
+const loadForum = () => {
+  if (!data.id) return
+  request.get('/forum/selectById/' + data.id).then(res => {
+    if (res.code === '200') {
+      data.forum = res.data || {}
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
 
 const deleteComment = (id) => {
   ElMessageBox.confirm('删除后无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
@@ -154,6 +162,9 @@ const loadComment = () => {
   })
 }
 
-loadComment()
+onMounted(() => {
+  loadForum()
+  loadComment()
+})
 
 </script>

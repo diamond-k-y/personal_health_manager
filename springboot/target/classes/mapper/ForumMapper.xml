@@ -4,14 +4,14 @@
 <mapper namespace="com.example.mapper.ForumMapper">
 
     <select id="selectAll" resultType="com.example.entity.Forum">
-        select forum.*, user.name as userName, user.avatar as userAvatar from `forum`
-        left join user on `forum`.user_id = user.id
+        select `forum`.*, `user`.name as userName, `user`.avatar as userAvatar from `forum`
+        left join `user` on `forum`.user_id = `user`.id
         <where>
-            <if test="title != null"> and forum.title like concat('%', #{title}, '%')</if>
-            <if test="userId != null"> and forum.user_id = #{userId}</if>
-            <if test="status != null"> and forum.status = #{status}</if>
+            <if test="title != null"> and `forum`.title like concat('%', #{title}, '%')</if>
+            <if test="userId != null"> and `forum`.user_id = #{userId}</if>
+            <if test="status != null"> and `forum`.status = #{status}</if>
         </where>
-        order by forum.id desc
+        order by `forum`.id desc
     </select>
 
     <delete id="deleteById">

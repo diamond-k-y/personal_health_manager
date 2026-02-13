@@ -8,7 +8,25 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/personal_health_manager?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 15
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+    user: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    enabled: false
 
+# PostgreSQL向量数据库配置
+pgvector:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
 # 配置mybatis实体和xml映射
 mybatis:
   configuration:
@@ -17,3 +35,28 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 
 fileBaseUrl: http://localhost:${server.port}
+# LangChain4j
+langchain4j:
+  openai:
+    chat-model:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api-key: ${API-KEY:your-api-key-here}
+      model-name: qwen3-max-2026-01-23
+      log-requests: true
+      log-responses: true
+    streaming-chat-model:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api-key: ${API-KEY:your-api-key-here}
+      model-name: qwen3-max-2026-01-23
+      log-requests: true
+      log-responses: true
+    embedding-model:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api-key: ${API-KEY:your-api-key-here}
+      model-name: text-embedding-v3
+      log-requests: true
+      log-responses: true
+      max-segments-per-batch: 10
+logging:
+  level:
+    dev.langchain4j: debug

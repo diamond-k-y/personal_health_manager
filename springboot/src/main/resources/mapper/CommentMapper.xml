@@ -4,36 +4,36 @@
 <mapper namespace="com.example.mapper.CommentMapper">
 
     <select id="selectAll" resultType="com.example.entity.Comment">
-        select comment.*, user.name as userName, user.avatar as userAvatar, forum.title as forumTitle from `comment`
-        left join user on comment.user_id = user.id
-        left join forum on comment.fid = forum.id
+        select `comment`.*, `user`.name as userName, `user`.avatar as userAvatar, `forum`.title as forumTitle from `comment`
+        left join `user` on `comment`.user_id = `user`.id
+        left join `forum` on `comment`.fid = `forum`.id
         <where>
-            <if test="content != null"> and comment.content like concat('%', #{content}, '%')</if>
-            <if test="userId != null"> and comment.user_id = #{userId}</if>
-            <if test="fid != null"> and comment.fid = #{fid}</if>
+            <if test="content != null"> and `comment`.content like concat('%', #{content}, '%')</if>
+            <if test="userId != null"> and `comment`.user_id = #{userId}</if>
+            <if test="fid != null"> and `comment`.fid = #{fid}</if>
         </where>
-        order by comment.id desc
+        order by `comment`.id desc
     </select>
 
     <select id="selectRootByFid" resultType="com.example.entity.Comment">
-        select comment.*, user.name as userName, user.avatar as userAvatar, forum.title as forumTitle from `comment`
-        left join user on comment.user_id = user.id
-        left join forum on comment.fid = forum.id
+        select `comment`.*, `user`.name as userName, `user`.avatar as userAvatar, `forum`.title as forumTitle from `comment`
+        left join `user` on `comment`.user_id = `user`.id
+        left join `forum` on `comment`.fid = `forum`.id
         <where>
-            <if test="fid != null"> and comment.fid = #{fid}</if>
-            and comment.pid is null
+            <if test="fid != null"> and `comment`.fid = #{fid}</if>
+            and `comment`.pid is null
         </where>
-        order by comment.id desc
+        order by `comment`.id desc
     </select>
 
     <select id="selectByRootId" resultType="com.example.entity.Comment">
-        select comment.*, user.name as userName, user.avatar as userAvatar, forum.title as forumTitle from `comment`
-        left join user on comment.user_id = user.id
-        left join forum on comment.fid = forum.id
+        select `comment`.*, `user`.name as userName, `user`.avatar as userAvatar, `forum`.title as forumTitle from `comment`
+        left join `user` on `comment`.user_id = `user`.id
+        left join `forum` on `comment`.fid = `forum`.id
         <where>
-            comment.root_id = #{rootId} and comment.pid is not null
+            `comment`.root_id = #{rootId} and `comment`.pid is not null
         </where>
-        order by comment.id asc
+        order by `comment`.id asc
     </select>
 
     <delete id="deleteById">

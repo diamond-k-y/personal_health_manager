@@ -4,8 +4,8 @@
 <mapper namespace="com.example.mapper.BodyRecordsMapper">
 
     <select id="selectAll" resultType="com.example.entity.BodyRecords">
-        select body_records.*, user.name as userName from `body_records`
-        left join `user` on body_records.user_id = user.id
+        select body_records.*, `user`.name as userName from `body_records`
+        left join `user` on body_records.user_id = `user`.id
         <where>
             <if test="date != null"> and body_records.`date` like concat('%', #{date}, '%')</if>
             <if test="userId != null"> and body_records.`user_id` = #{userId}</if>

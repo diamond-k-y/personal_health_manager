@@ -44,6 +44,10 @@
             <span>健康论坛</span>
           </el-menu-item>
 
+          <el-menu-item index="/manager/healthAssistant" v-if="data.user.role === 'USER'">
+            <el-icon><ChatLineRound /></el-icon>
+            <span>AI健康顾问</span>
+          </el-menu-item>
 
           <el-sub-menu index="1">
             <template #title>
@@ -108,8 +112,6 @@
       </div>
     </div>
     <!-- 下面部分结束 -->
-
-    <AiAssistant />
   </div>
 </template>
 

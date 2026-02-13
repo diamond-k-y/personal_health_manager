@@ -4,8 +4,8 @@
 <mapper namespace="com.example.mapper.SleepRecordsMapper">
 
     <select id="selectAll" resultType="com.example.entity.SleepRecords">
-        select sleep_records.*, user.name as userName from `sleep_records`
-        left join `user` on sleep_records.user_id = user.id
+        select sleep_records.*, `user`.name as userName from `sleep_records`
+        left join `user` on sleep_records.user_id = `user`.id
         <where>
             <if test="date != null"> and sleep_records.`date` like concat('%', #{date}, '%')</if>
             <if test="userId != null"> and sleep_records.`user_id` = #{userId}</if>
